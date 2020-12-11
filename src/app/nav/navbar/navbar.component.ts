@@ -1,3 +1,4 @@
+import { ThemingService } from './../../shared/services/theming.service';
 import { AuthService } from './../../auth/auth.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
@@ -13,7 +14,10 @@ export class NavbarComponent implements OnInit {
 
   @Output() toggleDrawer = new EventEmitter<void>();
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private themingService: ThemingService
+  ) {
     authService.user.subscribe((user) => {
       this.isAuth = !!user;
       this.profilePhoto = user.photoURL;
@@ -32,5 +36,23 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  changeTheme(theme: string) {
+    localStorage.setItem('theme', theme);
+    if (theme === 'system') {
+      const darkModeOn =
+        window.matchMedia &&
+        window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      if (darkModeOn) {
+        this.themingService.theme.next('dark-theme');
+      } else {
+        this.themingService.theme.next('light-theme');
+      }
+      return;
+    } else {
+      this.themingService.theme.next(theme);
+    }
   }
 }

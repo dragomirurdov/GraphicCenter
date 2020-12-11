@@ -4,6 +4,18 @@
   </button>
   <span>Graphic Center</span>
   <span class="spacer"></span>
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menuTheme"
+    mdTooltip="Change theme"
+  >
+    <mat-icon>format_color_fill</mat-icon>
+  </button>
+  <mat-menu #menuTheme="matMenu">
+    <button mat-menu-item (click)="changeTheme('light-theme')">Light</button>
+    <button mat-menu-item (click)="changeTheme('dark-theme')">Dark</button>
+    <button mat-menu-item (click)="changeTheme('system')">System</button>
+  </mat-menu>
   <button mat-icon-button (click)="googleLogin()" *ngIf="!isAuth">
     <mat-icon>fingerprint</mat-icon>
   </button>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 
+// COMPONENTS
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
@@ -15,7 +16,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
 
+// CDK
+import { OverlayModule } from '@angular/cdk/overlay';
+
 const materialModules = [
+  // COMPONENTS
   MatToolbarModule,
   MatSidenavModule,
   MatMenuModule,
@@ -27,6 +32,8 @@ const materialModules = [
   MatButtonModule,
   MatButtonToggleModule,
   MatIconModule,
+  // CDK
+  OverlayModule,
 ];
 
 @NgModule({

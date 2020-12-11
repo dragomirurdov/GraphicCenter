@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleDrawer.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Graphic Center</span>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="googleLogin()" *ngIf="!isAuth">
+    <mat-icon>fingerprint</mat-icon>
+  </button>
+  <img
+    class="profile-image"
+    src="{{ profilePhoto }}"
+    alt="Profile photo"
+    [matMenuTriggerFor]="menu"
+    *ngIf="isAuth"
+  />
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()" *ngIf="isAuth">
+      <mat-icon color="warn">exit_to_app</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

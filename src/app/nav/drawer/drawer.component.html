@@ -1,0 +1,20 @@
+<div class="drawer-wrapper">
+  <mat-nav-list>
+    <mat-list-item
+      mat-list-item
+      routerLink="login"
+      routerLinkActive="active"
+      (click)="toggleDrawer.emit()"
+    >
+      Login
+    </mat-list-item>
+    <mat-list-item
+      mat-list-item
+      routerLink="signup"
+      routerLinkActive="active"
+      (click)="toggleDrawer.emit()"
+    >
+      Sign Up
+    </mat-list-item>
+  </mat-nav-list>
+</div>

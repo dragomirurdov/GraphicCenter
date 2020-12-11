@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "graphic-center": {
+      "hosting": {
+        "graphic-center": [
+          "graphic-center"
+        ]
+      }
+    }
+  }
+}

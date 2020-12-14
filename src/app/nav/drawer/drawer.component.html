@@ -1,10 +1,11 @@
 <div class="drawer-wrapper">
+  <app-user-card></app-user-card>
   <mat-nav-list>
     <mat-list-item
       mat-list-item
       routerLink="login"
       routerLinkActive="active"
-      (click)="toggleDrawer.emit()"
+      (click)="closeDrawer.emit()"
     >
       Login
     </mat-list-item>
@@ -12,7 +13,7 @@
       mat-list-item
       routerLink="signup"
       routerLinkActive="active"
-      (click)="toggleDrawer.emit()"
+      (click)="closeDrawer.emit()"
     >
       Sign Up
     </mat-list-item>

@@ -1,35 +1,54 @@
-import { ApplicationRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+
 import { BehaviorSubject } from 'rxjs';
+
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Injectable({ providedIn: 'root' })
 export class ThemingService {
-  themes = ['dark-theme', 'light-theme'];
-  chosenTheme = localStorage.getItem('theme');
-  theme = new BehaviorSubject(
-    this.chosenTheme || this.chosenTheme === 'system'
-      ? this.chosenTheme
-      : 'light-theme'
+  themes = ['light-theme', 'dark-theme', 'system-theme'];
+  icons = ['google', 'facebook'];
+
+  defaultTheme = localStorage.getItem('theme');
+  activeTheme = new BehaviorSubject(
+    this.defaultTheme ? this.defaultTheme : 'system-theme'
   );
 
-  constructor(private ref: ApplicationRef) {
-    // initially trigger dark mode if preference is set to dark mode on system
-    if (this.chosenTheme === 'system') {
-      const darkModeOn =
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches;
+  constructor(
+    private domSanitizer: DomSanitizer,
+    private overlayContainer: OverlayContainer,
+    private iconRegistry: MatIconRegistry
+  ) {
+    this.registerIcons();
+    this.changeOverlayTheme(this.defaultTheme);
+  }
 
-      if (darkModeOn) {
-        this.theme.next('dark-theme');
-      }
-      // watch for changes of the preference
-      window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
-        console.log('Match media => ', e);
-        const turnOn = e.matches;
-        this.theme.next(turnOn ? 'dark-theme' : 'light-theme');
+  changeTheme(theme: string): void {
+    localStorage.setItem('theme', theme);
+    this.activeTheme.next(theme);
+    this.changeOverlayTheme(theme);
+  }
 
-        // trigger refresh of UI
-        this.ref.tick();
-      });
+  private changeOverlayTheme(theme: string): void {
+    const overlayContainerClasses = this.overlayContainer.getContainerElement()
+      .classList;
+    const themeClassesToRemove = Array.from(this.themes);
+    if (themeClassesToRemove.length) {
+      overlayContainerClasses.remove(...themeClassesToRemove);
     }
+    overlayContainerClasses.add(theme);
+  }
+
+  private registerIcons(): void {
+    this.icons.forEach((icon) => {
+      this.iconRegistry.addSvgIcon(
+        icon,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          `assets/icons/${icon}.svg`
+        )
+      );
+    });
   }
 }

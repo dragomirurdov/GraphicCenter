@@ -1,0 +1,7 @@
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  [mat-button] {
+    flex-grow: 1;
+  }
+}

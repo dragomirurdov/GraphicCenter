@@ -16,13 +16,21 @@ import { NavbarComponent } from './nav/navbar/navbar.component';
 import { DrawerComponent } from './nav/drawer/drawer.component';
 
 import { environment } from '../environments/environment';
+import { UserCardComponent } from './nav/user-card/user-card.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent, DrawerComponent],
+  declarations: [
+    AppComponent,
+    NavbarComponent,
+    DrawerComponent,
+    UserCardComponent,
+  ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     StoreModule.forRoot({}, {}),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,

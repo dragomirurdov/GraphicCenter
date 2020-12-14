@@ -1,18 +1,37 @@
+// .spacer {
+//   flex: 1 1 auto;
+// }
+
+// .drawer {
+//   width: 250px;
+// }
+
+// .profile-image {
+//   border-radius: 50%;
+//   width: 2.5rem;
+//   height: 2.5rem;
+//   cursor: pointer;
+// }
+
+// .mat-menu-item {
+//   width: 200px;
+// }
+
+// src\app\shared\components\sidenav\sidenav.component.scss
+.application-wrapper {
+  height: calc(100vh - 64px);
+  .mat-sidenav {
+    padding: 8px;
+    min-width: 300px;
+  }
+  .mat-sidenav-content {
+    height: calc(100vh - 96px);
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 1rem;
+    padding-bottom: 3rem;
+  }
+}
 .spacer {
   flex: 1 1 auto;
-}
-
-.drawer {
-  width: 250px;
-}
-
-.profile-image {
-  border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
-  cursor: pointer;
-}
-
-.mat-menu-item {
-  width: 200px;
 }

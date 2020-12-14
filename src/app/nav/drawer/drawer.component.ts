@@ -6,7 +6,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./drawer.component.scss'],
 })
 export class DrawerComponent implements OnInit {
-  @Output() toggleDrawer = new EventEmitter<void>();
+  @Output() closeDrawer = new EventEmitter<void>();
 
   constructor() {}
 

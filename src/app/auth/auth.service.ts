@@ -14,7 +14,6 @@ export class AuthService {
 
   initUser() {
     this.auth.user.subscribe((user) => {
-      console.log(user);
       this.user.next(user);
       if (user) {
       }

@@ -13,12 +13,10 @@ export class NavbarComponent implements OnInit {
 
   selectedTheme: string;
 
-  constructor(private authService: AuthService, private theme: ThemingService) {
-    authService.user.subscribe((user) => {
-      this.isAuth = !!user;
-      this.profilePhoto = user.photoURL;
-    });
-  }
+  constructor(
+    private authService: AuthService,
+    private theme: ThemingService
+  ) {}
 
   ngOnInit(): void {
     this.theme.activeTheme.subscribe((theme) => {

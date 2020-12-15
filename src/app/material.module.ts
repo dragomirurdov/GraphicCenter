@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
@@ -37,6 +38,7 @@ const materialModules = [
   MatButtonModule,
   MatButtonToggleModule,
   MatIconModule,
+  MatTooltipModule,
   MatExpansionModule,
   MatCardModule,
   // CDK

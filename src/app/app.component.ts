@@ -18,11 +18,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private authService: AuthService) {
     authService.initUser();
-    this.subs.add(
-      this.authService.user.subscribe((user) => {
-        this.image = user.photoURL;
-      })
-    );
+    // this.subs.add(
+    //   this.authService.user.subscribe((user) => {
+    //     this.image = user.photoURL;
+    //   })
+    // );
   }
 
   ngOnInit(): void {}

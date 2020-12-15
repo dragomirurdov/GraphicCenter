@@ -3,19 +3,27 @@
   <mat-nav-list>
     <mat-list-item
       mat-list-item
+      routerLink="/gallery"
+      routerLinkActive="active"
+      (click)="closeDrawer.emit()"
+    >
+      Gallery
+    </mat-list-item>
+    <mat-list-item
+      mat-list-item
+      routerLink="/about-us"
+      routerLinkActive="active"
+      (click)="closeDrawer.emit()"
+    >
+      About Us
+    </mat-list-item>
+    <mat-list-item
+      mat-list-item
       routerLink="login"
       routerLinkActive="active"
       (click)="closeDrawer.emit()"
     >
       Login
-    </mat-list-item>
-    <mat-list-item
-      mat-list-item
-      routerLink="signup"
-      routerLinkActive="active"
-      (click)="closeDrawer.emit()"
-    >
-      Sign Up
     </mat-list-item>
   </mat-nav-list>
 </div>

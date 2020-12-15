@@ -1,10 +1,16 @@
 <mat-drawer-container [class]="selectedTheme">
   <mat-toolbar>
-    <button mat-icon-button (click)="sidenav.toggle()">
+    <button mat-icon-button id="drawer-toggle" (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>Toolbar</span>
+    <button mat-button routerLink="/">Graphic Center</button>
     <span class="spacer"></span>
+    <div class="links">
+      <button mat-button routerLink="gallery">Gallery</button>
+      <button mat-button routerLink="about-us">About Us</button>
+      <button mat-button routerLink="login">Login</button>
+    </div>
+    <!-- Change Theme -->
     <button
       mat-icon-button
       [matMenuTriggerFor]="menu"
@@ -13,7 +19,6 @@
     >
       <mat-icon> brightness_6 </mat-icon>
     </button>
-    <ng-template #noRadio> radio_button_unchecked </ng-template>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="changeTheme('light-theme')">
         <mat-icon [color]="selectedTheme === 'light-theme' ? 'accent' : ''">
@@ -40,6 +45,7 @@
         System Theme
       </button>
     </mat-menu>
+    <ng-template #noRadio> radio_button_unchecked </ng-template>
   </mat-toolbar>
   <mat-drawer #sidenav mode="over">
     <app-drawer (closeDrawer)="sidenav.close()"></app-drawer>

@@ -28,10 +28,15 @@
       <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
     <mat-hint align="start">Minimal length 8</mat-hint>
-    <mat-hint align="end">{{ loginForm.value.password.length }}/8</mat-hint>
+    <mat-hint align="end">{{ loginForm.value.password?.length }}/8</mat-hint>
   </mat-form-field>
   <button type="submit" mat-raised-button color="primary">Login</button>
-  <button type="button" mat-raised-button class="auth-form__button">
+  <button
+    type="button"
+    mat-raised-button
+    class="auth-form__button"
+    (click)="googleLogin()"
+  >
     <mat-icon svgIcon="google"></mat-icon>
     <span>Login with Google</span>
   </button>

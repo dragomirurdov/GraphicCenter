@@ -1,1 +1,33 @@
 @mixin custom-components-theme($theme) {}
+
+
+@mixin snackbar($theme) {
+  $primary: mat-color(map-get($theme, primary));
+  $primary-text: mat-color(map-get($theme, primary), default-contrast);
+  $accent: mat-color(map-get($theme, accent));
+  $accent-text: mat-color(map-get($theme, accent), default-contrast);
+  $warn: mat-color(map-get($theme, warn));
+  $warn-text: mat-color(map-get($theme, warn), default-contrast);
+
+  .snackbar-success {
+    color: $primary-text;
+    background-color: $primary;
+  }
+  .snackbar-success .mat-simple-snackbar-action  {
+    color: $primary-text;
+  }
+  .snackbar-warning {
+    color: $accent-text;
+    background-color: $accent;
+  }
+  .snackbar-warning .mat-simple-snackbar-action  {
+    color: $accent-text;
+  }
+  .snackbar-error {
+    color: $warn-text;
+    background-color: $warn;
+  }
+  .snackbar-error .mat-simple-snackbar-action {
+    color: $warn-text;
+  }
+}

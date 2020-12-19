@@ -8,7 +8,17 @@
     <div class="links">
       <button mat-button routerLink="gallery">Gallery</button>
       <button mat-button routerLink="about-us">About Us</button>
-      <button mat-button routerLink="login">Login</button>
+      <button
+        mat-button
+        color="warn"
+        (click)="logout()"
+        *ngIf="user | async; else login"
+      >
+        Logout
+      </button>
+      <ng-template #login>
+        <button mat-button routerLink="login">Login</button>
+      </ng-template>
     </div>
     <!-- Change Theme -->
     <button

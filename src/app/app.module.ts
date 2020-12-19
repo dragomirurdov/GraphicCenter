@@ -1,3 +1,4 @@
+import { AuthEffects } from './auth/store/auth.effects';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -18,9 +19,13 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './nav/navbar/navbar.component';
 import { DrawerComponent } from './nav/drawer/drawer.component';
 import { UserCardComponent } from './nav/user-card/user-card.component';
+import { HomeComponent } from './home/home.component';
 
 import { environment } from '../environments/environment';
-import { HomeComponent } from './home/home.component';
+
+// NgRx
+import * as fromApp from './store/app.reducer';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,8 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     HttpClientModule,
     // NgRx
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

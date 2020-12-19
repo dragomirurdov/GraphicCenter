@@ -1,6 +1,12 @@
-import { ThemingService } from './../../shared/services/theming.service';
-import { AuthService } from './../../auth/auth.service';
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+
+import { User } from 'src/app/auth/models';
+import { ThemingService } from './../../shared/services/theming.service';
+
+import { Store } from '@ngrx/store';
+import * as fromApp from 'src/app/store/app.reducer';
+import * as authActions from './../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -8,31 +14,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  isAuth: boolean;
-  profilePhoto: string;
-
   selectedTheme: string;
+  user: Observable<User>;
 
   constructor(
-    private authService: AuthService,
-    private theme: ThemingService
+    private theme: ThemingService,
+    private store: Store<fromApp.AppState>
   ) {}
 
   ngOnInit(): void {
     this.theme.activeTheme.subscribe((theme) => {
       this.selectedTheme = theme;
     });
+    this.user = this.store.select(fromApp.selectUser);
   }
 
   changeTheme(theme: string): void {
     this.theme.changeTheme(theme);
   }
 
-  googleLogin(): void {
-    this.authService.googleLogin();
-  }
-
   logout(): void {
-    this.authService.logout();
+    this.store.dispatch(authActions.logout());
   }
 }

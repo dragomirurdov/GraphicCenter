@@ -38,7 +38,6 @@ export class DragAndDropDirective {
     this.fileOver = false;
     const file: File = event.dataTransfer.files[0];
     if (file.type.match('image/.*')) {
-      console.log(file);
       this.fileDropped.emit(file);
     } else {
       this.snackbar.error('Only image file are allowed!');

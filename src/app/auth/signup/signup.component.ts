@@ -37,8 +37,6 @@ export class SignupComponent implements OnInit {
       const displayName =
         this.signupForm.value.name + ' ' + this.signupForm.value.surname;
       this.store.dispatch(authActions.signup({ email, password, displayName }));
-    } else {
-      console.log('Signup forms values => ', this.signupForm.value);
     }
   }
 

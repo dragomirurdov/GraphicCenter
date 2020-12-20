@@ -5,7 +5,13 @@
     (fileDropped)="imageChange($event)"
     *ngIf="!imageLoaded"
   >
-    <input id="imageInput" type="file" accept="image/*" #photoInput />
+    <input
+      id="imageInput"
+      type="file"
+      accept="image/*"
+      (change)="imageChange($event.target.files[0])"
+      #photoInput
+    />
     <div *ngIf="!isLoading; else spinner">
       <mat-icon>cloud_upload</mat-icon>
       <h3>Drag and Drop image here</h3>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { SharedModule } from './../shared/shared.module';
 import { MaterialModule } from './../material.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     AuthRoutingModule,
     CommonModule,
+    SharedModule,
     MaterialModule,
     AngularFireAuthModule,
     AngularFirestoreModule,

@@ -1,4 +1,8 @@
-<form (ngSubmit)="signup()" [formGroup]="signupForm" class="auth-form">
+<form
+  (ngSubmit)="signup()"
+  [formGroup]="signupForm"
+  class="auth-form page-wrapper"
+>
   <div class="auth-form__name">
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
@@ -19,6 +23,7 @@
       />
     </mat-form-field>
   </div>
+  <app-image-uploader [disableCrop]="false"></app-image-uploader>
   <mat-form-field appearance="outline">
     <mat-label>Email</mat-label>
     <input

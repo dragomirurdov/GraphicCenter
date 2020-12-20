@@ -22,6 +22,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // CDK
 import { OverlayModule } from '@angular/cdk/overlay';
@@ -44,6 +46,8 @@ const materialModules = [
   MatExpansionModule,
   MatCardModule,
   MatSnackBarModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
   // CDK
   OverlayModule,
 ];

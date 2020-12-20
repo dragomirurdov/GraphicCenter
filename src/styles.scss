@@ -45,6 +45,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.page-wrapper {
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+
 .auth-form {
   display: flex;
   flex-direction: column;

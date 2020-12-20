@@ -40,7 +40,12 @@
     <mat-icon svgIcon="google"></mat-icon>
     <span>Login with Google</span>
   </button>
-  <button type="button" mat-raised-button class="auth-form__button">
+  <button
+    type="button"
+    mat-raised-button
+    class="auth-form__button"
+    (click)="facebookLogin()"
+  >
     <mat-icon svgIcon="facebook"></mat-icon>
     <span>Login with Facebook</span>
   </button>

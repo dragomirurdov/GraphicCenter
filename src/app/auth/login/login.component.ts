@@ -55,6 +55,10 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(authActions.googleLogin());
   }
 
+  facebookLogin(): void {
+    this.snackbar.warning('Feature is in Development');
+  }
+
   logout(): void {
     this.store.dispatch(authActions.logout());
   }

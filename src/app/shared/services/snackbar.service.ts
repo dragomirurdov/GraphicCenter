@@ -8,21 +8,21 @@ export class SnackbarService {
 
   success(message: string, action?: string): void {
     this.snackbar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
       panelClass: ['snackbar-success'],
     });
   }
 
   warning(message: string, action?: string): void {
     this.snackbar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
       panelClass: ['snackbar-warning'],
     });
   }
 
   error(message: string, action?: string): void {
     this.snackbar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
       panelClass: ['snackbar-error'],
     });
   }

@@ -17,6 +17,16 @@ export const emailLogin = createAction(
 
 export const googleLogin = createAction('[Auth] Google login');
 
+export const signup = createAction(
+  '[Auth] Sign Up',
+  props<{
+    email: string;
+    password: string;
+    displayName: string;
+    photoUrl?: string;
+  }>()
+);
+
 export const logout = createAction('[Auth] Logout');
 
 export const error = createAction('[Auth] Error', props<{ error: string }>());

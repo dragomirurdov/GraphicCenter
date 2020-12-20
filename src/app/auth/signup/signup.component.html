@@ -75,17 +75,27 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Date of Birth</mat-label>
-    <input matInput [matDatepicker]="picker" />
+    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
   <button type="submit" mat-raised-button color="primary">SIGN UP</button>
-  <button type="button" mat-raised-button class="auth-form__button">
+  <button
+    type="button"
+    mat-raised-button
+    class="auth-form__button"
+    (click)="googleSignup()"
+  >
     <mat-icon svgIcon="google"></mat-icon>
     <span>GOOGLE</span>
   </button>
-  <button type="button" mat-raised-button class="auth-form__button">
+  <button
+    type="button"
+    mat-raised-button
+    class="auth-form__button"
+    (click)="facebookSignup()"
+  >
     <mat-icon svgIcon="facebook"></mat-icon>
     <span>FACEBOOK</span>
   </button>

@@ -1,9 +1,10 @@
+import { props } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import firebase from 'firebase/app';
-import { of, from } from 'rxjs';
+import { of, from, throwError } from 'rxjs';
 
 import { SnackbarService } from './../../shared/services';
 import { User } from '../models';
@@ -76,6 +77,28 @@ export class AuthEffects {
     )
   );
 
+  signup = createEffect(() =>
+    this.actions.pipe(
+      ofType(authActions.signup),
+      switchMap((payload) => {
+        return from(
+          this.createUser(
+            payload.email,
+            payload.password,
+            payload.displayName,
+            payload?.photoUrl
+          )
+        );
+      }),
+      map(() => {
+        return authActions.getUser();
+      }),
+      catchError((err) => {
+        return of(authActions.error({ error: err.message }));
+      })
+    )
+  );
+
   loginRedirect = createEffect(
     () =>
       this.actions.pipe(
@@ -104,12 +127,28 @@ export class AuthEffects {
     () =>
       this.actions.pipe(
         ofType(authActions.error),
-        tap((props) => {
-          this.snackbar.error(props.error);
+        tap((payload) => {
+          this.snackbar.error(payload.error);
         })
       ),
     { dispatch: false }
   );
+
+  private createUser(
+    email: string,
+    password: string,
+    displayName: string,
+    photoURL?: string
+  ): Promise<void> {
+    return this.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        user.user.updateProfile({
+          displayName,
+          photoURL,
+        });
+      });
+  }
 
   private loginWithGoogle(): Promise<firebase.auth.UserCredential> {
     const provider = new firebase.auth.GoogleAuthProvider();

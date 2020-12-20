@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { User } from '../models';
-import * as AuthActions from './auth.actions';
+import * as authActions from './auth.actions';
 
 export interface State {
   user: User;
@@ -16,10 +16,10 @@ const initialState: State = {
 
 export const authReducer = createReducer(
   initialState,
-  on(AuthActions.getUser, (state) => {
+  on(authActions.getUser, (state) => {
     return { ...state, loading: true };
   }),
-  on(AuthActions.authenticated, (state, props) => {
+  on(authActions.authenticated, (state, props) => {
     return {
       ...state,
       user: props,
@@ -27,35 +27,42 @@ export const authReducer = createReducer(
       error: null,
     };
   }),
-  on(AuthActions.notAuthenticated, (state) => {
+  on(authActions.notAuthenticated, (state) => {
     return {
       ...state,
       ...initialState,
       loading: false,
     };
   }),
-  on(AuthActions.emailLogin, (state) => {
+  on(authActions.emailLogin, (state) => {
     return {
       ...state,
       loading: true,
       error: null,
     };
   }),
-  on(AuthActions.googleLogin, (state) => {
+  on(authActions.googleLogin, (state) => {
     return {
       ...state,
       loading: true,
       error: null,
     };
   }),
-  on(AuthActions.error, (state, props) => {
+  on(authActions.signup, (state) => {
+    return {
+      ...state,
+      loading: true,
+      error: null,
+    };
+  }),
+  on(authActions.error, (state, props) => {
     return {
       ...state,
       error: props.error,
       loading: false,
     };
   }),
-  on(AuthActions.logout, (state) => {
+  on(authActions.logout, (state) => {
     return {
       ...state,
       user: null,

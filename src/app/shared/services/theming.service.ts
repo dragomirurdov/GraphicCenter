@@ -11,9 +11,8 @@ export class ThemingService {
   themes = ['light-theme', 'dark-theme', 'system-theme'];
   icons = ['google', 'facebook'];
 
-  defaultTheme = localStorage.getItem('theme');
   activeTheme = new BehaviorSubject(
-    this.defaultTheme ? this.defaultTheme : 'system-theme'
+    localStorage.getItem('theme') || 'system-theme'
   );
 
   constructor(
@@ -22,7 +21,7 @@ export class ThemingService {
     private iconRegistry: MatIconRegistry
   ) {
     this.registerIcons();
-    this.changeOverlayTheme(this.defaultTheme);
+    this.changeOverlayTheme(this.activeTheme.value);
   }
 
   changeTheme(theme: string): void {
@@ -34,7 +33,7 @@ export class ThemingService {
   private changeOverlayTheme(theme: string): void {
     const overlayContainerClasses = this.overlayContainer.getContainerElement()
       .classList;
-    const themeClassesToRemove = Array.from(this.themes);
+    const themeClassesToRemove = this.themes;
     if (themeClassesToRemove.length) {
       overlayContainerClasses.remove(...themeClassesToRemove);
     }

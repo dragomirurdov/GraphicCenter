@@ -6,12 +6,10 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { SnackbarService } from './../../shared/services/snackbar.service';
+import { SnackbarService } from './../../shared/services';
 
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';
-import { Observable } from 'rxjs';
-import { User } from '../models';
 
 import * as authActions from './../store/auth.actions';
 

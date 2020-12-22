@@ -1,4 +1,3 @@
-import { SnackbarService } from './../../shared/services/snackbar.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -6,6 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+
+import { SnackbarService } from './../../shared/services';
 
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/app.reducer';

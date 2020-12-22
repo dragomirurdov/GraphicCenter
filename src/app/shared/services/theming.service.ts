@@ -1,3 +1,4 @@
+import { ConfigService } from './config.service';
 import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -11,20 +12,27 @@ export class ThemingService {
   themes = ['light-theme', 'dark-theme', 'system-theme'];
   icons = ['google', 'facebook'];
 
-  activeTheme = new BehaviorSubject(
-    localStorage.getItem('theme') || 'system-theme'
-  );
+  activeTheme: BehaviorSubject<string>;
 
   constructor(
     private domSanitizer: DomSanitizer,
     private overlayContainer: OverlayContainer,
-    private iconRegistry: MatIconRegistry
+    private iconRegistry: MatIconRegistry,
+    private configService: ConfigService
   ) {
-    this.registerIcons();
+    let defaultTheme = 'light-theme';
+    if (configService.isBrowser) {
+      defaultTheme = localStorage.getItem('theme') || 'system-theme';
+    }
+    this.activeTheme = new BehaviorSubject(defaultTheme);
     this.changeOverlayTheme(this.activeTheme.value);
+    this.registerIcons();
   }
 
   changeTheme(theme: string): void {
+    if (this.configService.isServer && theme === 'system-theme') {
+      return;
+    }
     localStorage.setItem('theme', theme);
     this.activeTheme.next(theme);
     this.changeOverlayTheme(theme);

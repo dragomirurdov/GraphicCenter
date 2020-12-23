@@ -2,38 +2,137 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
+
 // Plus imports for other components in your app.
+@import "./assets/theme/app-theme.scss";
+@import "./assets/theme/components-theme.scss";
 
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat-core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$graphic-center-primary: mat-palette($mat-indigo);
-$graphic-center-accent: mat-palette($mat-pink, A200, A100, A400);
+.light-theme {
+  @include angular-material-theme($light-theme);
+  @include custom-components-theme($light-theme);
+  @include snackbar($light-theme);
+}
 
-// The warn palette is optional (defaults to red).
-$graphic-center-warn: mat-palette($mat-red);
+.dark-theme {
+  @include angular-material-theme($dark-theme);
+  @include custom-components-theme($dark-theme);
+  @include snackbar($dark-theme);
+}
 
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$graphic-center-theme: mat-light-theme((
-  color: (
-    primary: $graphic-center-primary,
-    accent: $graphic-center-accent,
-    warn: $graphic-center-warn,
-  )
-));
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($graphic-center-theme);
+.system-theme {
+  @media(prefers-color-scheme: light) {
+    @include angular-material-theme($light-theme);
+    @include custom-components-theme($light-theme);
+    @include snackbar($light-theme);
+  }
+  @media(prefers-color-scheme: dark) {
+    @include angular-material-theme($dark-theme);
+    @include custom-components-theme($dark-theme);
+    @include snackbar($dark-theme);
+  }
+}
 
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.page-wrapper {
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 450px;
+  margin: auto;
+
+  & > *:not(:last-child) { margin-bottom: 1rem; }
+
+  &__name {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button .mat-button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mat-expansion-panel-body {
+    display: flex;
+    flex-direction: column;
+    .auth-form__button:not(:last-child) { margin-bottom: 1rem; }
+  }
+}
+
+// Breakpoints
+// https://material.io/design/layout/responsive-layout-grid.html#breakpoints
+
+// HANDSET => xsmall
+@media (max-width: 599px) {
+  .mat-toolbar .links { display: none; }
+  .auth-form__name { flex-direction: column; }
+}
+
+  // small handset => xsmall
+  @media (max-width: 359px) {}
+
+  // medium handset => xsmall
+  @media (min-width: 360px) and (max-width: 399px) {}
+
+  // large handset => xsmall
+  @media (min-width: 400) and (max-width: 479px) {}
+
+  // large handset => xsmall
+  @media (min-width: 480px) and (max-width: 599px) {}
+
+/************************************************************************/
+
+// TABLET => small
+@media (min-width: 600px) {
+  #drawer-toggle { display: none; }
+  .auth-form__name .mat-form-field { width: 49%; }
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {}
+
+  // small tablet => small
+  @media (min-width: 600px) and (max-width: 719px) {}
+
+  // large tablet => small
+  @media (min-width: 720px) and (max-width: 839px) {}
+
+  // large tablet => small
+  @media (min-width: 840px) and (max-width: 959px) {}
+
+  // large tablet => small
+  @media (min-width: 960px) and (max-width: 1023px) {}
+
+/************************************************************************/
+
+// large tablet => medium
+@media (min-width: 1024px) and (max-width: 1279px) {}
+
+// large tablet => medium
+@media (min-width: 1280px) and (max-width: 1439px) {}
+
+// desktop => large
+@media (min-width: 1440px) and (max-width: 1559px) {}
+
+// desktop => large
+@media (min-width: 1600px) and (max-width: 1919px) {}
+
+// desktop => xlarge
+@media (min-width: 1920px) {}

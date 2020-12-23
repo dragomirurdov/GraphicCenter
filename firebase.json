@@ -2,7 +2,7 @@
   "hosting": [
     {
       "target": "graphic-center",
-      "public": "dist/graphic-center",
+      "public": "dist/graphic-center/browser",
       "ignore": [
         "**/.*"
       ],

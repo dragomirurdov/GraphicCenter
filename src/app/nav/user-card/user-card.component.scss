@@ -1,0 +1,12 @@
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  [mat-button] {
+    flex-grow: 1;
+  }
+}
+.mat-card-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

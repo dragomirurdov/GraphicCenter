@@ -1,5 +1,12 @@
-import { AuthService } from './../../auth/auth.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+
+import { User } from 'src/app/auth/models';
+import { ThemingService } from './../../shared/services/theming.service';
+
+import { Store } from '@ngrx/store';
+import * as fromApp from 'src/app/store/app.reducer';
+import * as authActions from './../../auth/store/auth.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -7,30 +14,26 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  sidenavToggle: boolean;
-  isAuth: boolean;
-  profilePhoto: string;
+  selectedTheme: string;
+  user: Observable<User>;
 
-  @Output() toggleDrawer = new EventEmitter<void>();
+  constructor(
+    private theme: ThemingService,
+    private store: Store<fromApp.AppState>
+  ) {}
 
-  constructor(private authService: AuthService) {
-    authService.user.subscribe((user) => {
-      this.isAuth = !!user;
-      this.profilePhoto = user.photoURL;
+  ngOnInit(): void {
+    this.theme.activeTheme.subscribe((theme) => {
+      this.selectedTheme = theme;
     });
+    this.user = this.store.select(fromApp.selectUser);
   }
 
-  ngOnInit(): void {}
-
-  openSidenav(): void {
-    this.sidenavToggle = true;
+  changeTheme(theme: string): void {
+    this.theme.changeTheme(theme);
   }
 
-  googleLogin() {
-    this.authService.googleLogin();
-  }
-
-  logout() {
-    this.authService.logout();
+  logout(): void {
+    this.store.dispatch(authActions.logout());
   }
 }

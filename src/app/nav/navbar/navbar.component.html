@@ -1,23 +1,69 @@
-<mat-toolbar color="primary">
-  <button mat-icon-button (click)="toggleDrawer.emit()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>Graphic Center</span>
-  <span class="spacer"></span>
-  <button mat-icon-button (click)="googleLogin()" *ngIf="!isAuth">
-    <mat-icon>fingerprint</mat-icon>
-  </button>
-  <img
-    class="profile-image"
-    src="{{ profilePhoto }}"
-    alt="Profile photo"
-    [matMenuTriggerFor]="menu"
-    *ngIf="isAuth"
-  />
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="logout()" *ngIf="isAuth">
-      <mat-icon color="warn">exit_to_app</mat-icon>
-      <span>Logout</span>
+<mat-drawer-container [class]="selectedTheme">
+  <mat-toolbar>
+    <button mat-icon-button id="drawer-toggle" (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
     </button>
-  </mat-menu>
-</mat-toolbar>
+    <button mat-button routerLink="/">Graphic Center</button>
+    <span class="spacer"></span>
+    <div class="links">
+      <button mat-button routerLink="gallery">Gallery</button>
+      <button mat-button routerLink="about-us">About Us</button>
+      <button
+        mat-button
+        color="warn"
+        (click)="logout()"
+        *ngIf="user | async; else login"
+      >
+        Logout
+      </button>
+      <ng-template #login>
+        <button mat-button routerLink="login">Login</button>
+      </ng-template>
+    </div>
+    <!-- Change Theme -->
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      class="menu-button"
+      matTooltip="Select a theme color"
+    >
+      <mat-icon> brightness_6 </mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="changeTheme('light-theme')">
+        <mat-icon [color]="selectedTheme === 'light-theme' ? 'accent' : ''">
+          <ng-container *ngIf="selectedTheme === 'light-theme'; else noRadio">
+            radio_button_checked
+          </ng-container>
+        </mat-icon>
+        Light Theme
+      </button>
+      <button mat-menu-item (click)="changeTheme('dark-theme')">
+        <mat-icon [color]="selectedTheme === 'dark-theme' ? 'accent' : ''">
+          <ng-container *ngIf="selectedTheme === 'dark-theme'; else noRadio">
+            radio_button_checked
+          </ng-container>
+        </mat-icon>
+        Dark Theme
+      </button>
+      <button mat-menu-item (click)="changeTheme('system-theme')">
+        <mat-icon [color]="selectedTheme === 'system-theme' ? 'accent' : ''">
+          <ng-container *ngIf="selectedTheme === 'system-theme'; else noRadio">
+            radio_button_checked
+          </ng-container>
+        </mat-icon>
+        System Theme
+      </button>
+    </mat-menu>
+    <ng-template #noRadio> radio_button_unchecked </ng-template>
+  </mat-toolbar>
+  <mat-drawer #sidenav mode="over">
+    <app-drawer (closeDrawer)="sidenav.close()"></app-drawer>
+  </mat-drawer>
+  <mat-sidenav-container class="application-wrapper">
+    <mat-sidenav-content>
+      <!-- Application Content -->
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</mat-drawer-container>

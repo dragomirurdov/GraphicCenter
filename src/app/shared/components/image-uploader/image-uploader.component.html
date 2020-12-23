@@ -1,0 +1,26 @@
+<div class="cropper-wrapper">
+  <div
+    class="drop-zone"
+    appDragAndDrop
+    (fileDropped)="imageChange($event)"
+    *ngIf="!imageLoaded"
+  >
+    <input
+      id="imageInput"
+      type="file"
+      accept="image/*"
+      (change)="imageChange($event.target.files[0])"
+      #photoInput
+    />
+    <div *ngIf="!isLoading; else spinner">
+      <mat-icon>cloud_upload</mat-icon>
+      <h3>Drag and Drop image here</h3>
+      <h3>or</h3>
+      <label for="imageInput">Browse for file</label>
+    </div>
+    <ng-template #spinner>
+      <mat-spinner></mat-spinner>
+    </ng-template>
+  </div>
+  <img #image width="100%" />
+</div>

@@ -1,0 +1,40 @@
+// LIGHT THEME
+$light-primary: mat-palette($mat-indigo, 500);
+$light-accent: mat-palette($mat-deep-orange, 500);
+$light-warn: mat-palette($mat-red);
+
+$light-theme: mat-light-theme(
+  (
+    color: (
+      primary: $light-primary,
+      accent: $light-accent,
+      warn: $light-warn,
+    ),
+  )
+);
+
+// DARK THEME
+$dark-primary: mat-palette($mat-indigo, 500);
+$dark-accent: mat-palette($mat-deep-orange, 500);
+$dark-warn: mat-palette($mat-red);
+
+$dark-theme: mat-dark-theme(
+  (
+    color: (
+      primary: $dark-primary,
+      accent: $dark-accent,
+      warn: $dark-warn,
+    ),
+  )
+);
+
+// TYPOGRAPHY
+$heading-font-family: "'Work Sans', sans-serif";
+$typography: mat-typography-config(
+  $display-4: mat-typography-level(112px, $font-family: $heading-font-family),
+  $display-3: mat-typography-level(56px, $font-family: $heading-font-family),
+  $display-2: mat-typography-level(45px, $font-family: $heading-font-family),
+  $display-1: mat-typography-level(34px, $font-family: $heading-font-family),
+  $headline: mat-typography-level(24px, $font-family: $heading-font-family),
+  $title: mat-typography-level(20px, $font-family: $heading-font-family),
+);

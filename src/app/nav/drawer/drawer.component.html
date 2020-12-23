@@ -1,20 +1,29 @@
 <div class="drawer-wrapper">
+  <app-user-card></app-user-card>
   <mat-nav-list>
+    <mat-list-item
+      mat-list-item
+      routerLink="/gallery"
+      routerLinkActive="active"
+      (click)="closeDrawer.emit()"
+    >
+      Gallery
+    </mat-list-item>
+    <mat-list-item
+      mat-list-item
+      routerLink="/about-us"
+      routerLinkActive="active"
+      (click)="closeDrawer.emit()"
+    >
+      About Us
+    </mat-list-item>
     <mat-list-item
       mat-list-item
       routerLink="login"
       routerLinkActive="active"
-      (click)="toggleDrawer.emit()"
+      (click)="closeDrawer.emit()"
     >
       Login
-    </mat-list-item>
-    <mat-list-item
-      mat-list-item
-      routerLink="signup"
-      routerLinkActive="active"
-      (click)="toggleDrawer.emit()"
-    >
-      Sign Up
     </mat-list-item>
   </mat-nav-list>
 </div>

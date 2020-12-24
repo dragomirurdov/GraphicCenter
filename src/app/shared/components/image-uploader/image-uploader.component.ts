@@ -29,11 +29,19 @@ export class ImageUploaderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {}
 
   imageChange(file): void {
+    if (!file) {
+      this.image.nativeElement.style.display = 'none';
+      this.cropper.destroy();
+      this.imageLoaded = false;
+      this.isLoading = false;
+      return;
+    }
     const reader = new FileReader();
     reader.onloadstart = () => {
       this.isLoading = true;
     };
     reader.onload = () => {
+      this.image.nativeElement.style.display = 'block';
       this.image.nativeElement.src = reader.result;
     };
     reader.readAsDataURL(file);

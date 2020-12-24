@@ -1,7 +1,5 @@
-@mixin custom-components-theme($theme) {}
+@mixin custom-components-theme($theme) {
 
-
-@mixin snackbar($theme) {
   $primary: mat-color(map-get($theme, primary));
   $primary-text: mat-color(map-get($theme, primary), default-contrast);
   $accent: mat-color(map-get($theme, accent));
@@ -30,4 +28,10 @@
   .snackbar-error .mat-simple-snackbar-action {
     color: $warn-text;
   }
+
+  .cropper-point,
+  .cropper-line {
+    background-color: $accent;
+  }
+  .cropper-view-box{ outline-color: $accent; }
 }

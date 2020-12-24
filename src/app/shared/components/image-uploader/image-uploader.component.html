@@ -1,26 +1,46 @@
-<div class="cropper-wrapper">
+<div class="image-uploader-wrapper">
   <div
     class="drop-zone"
     appDragAndDrop
     (fileDropped)="imageChange($event)"
-    *ngIf="!imageLoaded"
+    *ngIf="!imageLoaded; else changeImage"
   >
-    <input
-      id="imageInput"
-      type="file"
-      accept="image/*"
-      (change)="imageChange($event.target.files[0])"
-      #photoInput
-    />
-    <div *ngIf="!isLoading; else spinner">
-      <mat-icon>cloud_upload</mat-icon>
-      <h3>Drag and Drop image here</h3>
-      <h3>or</h3>
-      <label for="imageInput">Browse for file</label>
+    <div *ngIf="!isLoading; else spinner" class="upload-image">
+      <input
+        class="upload-image__input"
+        id="imageInput"
+        type="file"
+        accept="image/*"
+        (change)="imageChange($event.target.files[0])"
+        #photoInput
+      />
+      <label class="upload-image__label" for="imageInput">
+        <img
+          class="upload-image__image"
+          src="assets/images/undraw_upload.svg"
+          alt="Upload photo"
+        />
+        <div class="mat-title upload-image__label">Drag and Drop</div>
+        <caption class="mat-caption">
+          -- or --
+        </caption>
+        <div class="mat-subheading-1">Click for browse</div>
+      </label>
     </div>
     <ng-template #spinner>
       <mat-spinner></mat-spinner>
     </ng-template>
   </div>
-  <img #image width="100%" />
+  <img #image width="100%" class="cropper" />
+  <ng-template #changeImage>
+    <button
+      type="button"
+      mat-mini-fab
+      class="change-button"
+      matTooltip="Choose another image"
+      (click)="imageChange(null)"
+    >
+      <mat-icon>cached</mat-icon>
+    </button>
+  </ng-template>
 </div>
